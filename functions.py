@@ -19,6 +19,12 @@ def make_sql_frame(sql):
     return df
 
 
+#function that takes in a dataFrame and sample size and returns the means
+def sample_mean(dataFrame, sample_size):
+    sample = np.random.choice(dataFrame, size=sample_size, replace=True)
+    return sample.mean()
+
+
 #funcion that adds a binary value for Home Wins, Losses, Draws 
 #given a soccer match with no result but with goals for each side
 
@@ -32,7 +38,7 @@ def add_results(dataFrame):
     return dataFrame
 
 #Calculates Team Win Percantages, Home, Away and Total
-def calc_wins(dataFrame):
+def calc_wins(dataFrame):   
     #Calculating Wins as Home Team and Win Percentage as Home Team
     HomeTeamWins = dataFrame.groupby(['home_team'])['HomeWin', 'AwayWin', 'Draw'].sum()
     HomeTeamWins['HomeWinPct'] = HomeTeamWins['HomeWin'] / (HomeTeamWins['HomeWin'] + HomeTeamWins['AwayWin'] + HomeTeamWins['Draw'])
